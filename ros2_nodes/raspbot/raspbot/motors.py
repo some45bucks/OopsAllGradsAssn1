@@ -102,7 +102,7 @@ def main(args=None):
   publisher = MinimalPublisher()
   try:
     rclpy.spin(subscriber)
-    publisher.motor_callback()
+    rclpy.spin(publisher)
   except Exception as e:
     print(e)
     subscriber.car.stop()
