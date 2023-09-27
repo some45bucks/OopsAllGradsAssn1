@@ -82,13 +82,25 @@ class MinimalSubscriber(Node):
       self.car.set_servo(2, msg.data[1])
       self.servo2_angle = msg.data[1]
 
+class MinimalPublisher(Node):
+  def __init__(self):
+    super().__init__('motors2')
+    self.publisher = self.create_publisher(Int32MultiArray, '/motor_control', 10)
+  
+  def motor_callback(self):
+    msg = Int32MultiArray()
+    msg.data = [100,100]
+    self.publisher.publish(msg)
+
+
 def main(args=None):
   rclpy.init(args=args)
   
   subscriber = MinimalSubscriber()
-  
+  publisher = MinimalPublisher()
   try:
     rclpy.spin(subscriber)
+    rclpy.spin_once(publisher)
   except Exception as e:
     print(e)
     subscriber.car.stop()
