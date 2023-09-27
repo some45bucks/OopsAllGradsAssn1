@@ -24,6 +24,7 @@ setup(
             'motorsPublish = raspbot.motorsPublish:main',
             'sonar = raspbot.sonar:main',
             'camera = raspbot.camera:main',
+            'DRAC = raspbot.DRAC:main'
         ],
     },
 )
