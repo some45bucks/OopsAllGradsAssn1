@@ -89,8 +89,10 @@ def main(args=None):
   subscriber = MinimalSubscriber()
   
   try:
-      subscriber.car.stop()
-    #rclpy.spin(subscriber)
+    rclpy.spin(subscriber)
+  except KeyboardInterrupt as e:
+    print(e)
+    subscriber.car.stop()
   except Exception as e:
     print(e)
     subscriber.car.stop()
