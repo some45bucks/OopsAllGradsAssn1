@@ -25,3 +25,5 @@ Building the ROS package is only required when cloning the repository or when ne
 * Trigger Input Pulse width: 10uS TTL pulse
 * Echo Output Signal: TTL pulse proportional to the distance range
 * Dimension: 45mm x 20mm x 15mm
+
+At 75 power the robot moves at .3 meters per second
