@@ -5,7 +5,7 @@ from std_msgs.msg import Int32MultiArray
 import smbus
 import time
 import math
-
+from time import sleep
 class MinimalPublisher(Node):
   def __init__(self):
     super().__init__('motorsPublish')
@@ -17,6 +17,10 @@ class MinimalPublisher(Node):
     msg = Int32MultiArray()
     msg.data = [100,100]
     self.publisher.publish(msg)
+    sleep(2)
+    msg.data = [0,0]
+    self.publisher.publish(msg)
+
 
 
 def main(args=None):
