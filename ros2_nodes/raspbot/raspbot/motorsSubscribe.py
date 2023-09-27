@@ -72,7 +72,6 @@ class MinimalSubscriber(Node):
     # self.servo2_angle = -1
   
   def motor_callback(self, msg):
-    print(msg)
     self.car.control_car(msg.data[0], msg.data[1])
   
   # def servo_callback(self, msg):
