@@ -1,13 +1,17 @@
-# Using the Docker Container
+# Assignment 1
 
-## Placing the ros2_nodes folder as /root/ros2_ws/src
+## Setup
 
-This will make it so your files don't get deleted when the container ends
+### Building ROS Package
 
-```sh
-docker run -it --rm --privileged -v ${PWD}/ros2_nodes:/root/ros2_ws/src humble
-```
+Building the ROS package is only required when cloning the repository or when new nodes are added. To build:
 
+* Navigate to the `ros2_nodes/raspbot` directory and run `colcon build --symlink-install` to build the package.
+
+### Using the Nodes
+
+* To use the nodes, first source the `install/local_setup.bash` if you haven't already for the existing shell session.
+* Run nodes using `ros2 run raspbot <list of node names here>`
 
 ## Info about sonar
 
