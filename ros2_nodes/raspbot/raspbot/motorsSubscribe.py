@@ -64,45 +64,30 @@ class Car:
 
 class MinimalSubscriber(Node):
   def __init__(self):
-    super().__init__('motors')
+    super().__init__('motorsSubscribe')
     self.car = Car()
     self.motor_subscription = self.create_subscription(Int32MultiArray, '/motor_control', self.motor_callback, 10)
-    self.servo_subscription = self.create_subscription(Int32MultiArray, '/servo_control', self.servo_callback, 10)
-    self.servo1_angle = -1
-    self.servo2_angle = -1
+    # self.servo_subscription = self.create_subscription(Int32MultiArray, '/servo_control', self.servo_callback, 10)
+    # self.servo1_angle = -1
+    # self.servo2_angle = -1
   
   def motor_callback(self, msg):
     self.car.control_car(msg.data[0], msg.data[1])
   
-  def servo_callback(self, msg):
-    if msg.data[0] != self.servo1_angle:
-      self.car.set_servo(1, msg.data[0])
-      self.servo1_angle = msg.data[0]
-    if msg.data[1] != self.servo2_angle:
-      self.car.set_servo(2, msg.data[1])
-      self.servo2_angle = msg.data[1]
-
-class MinimalPublisher(Node):
-  def __init__(self):
-    super().__init__('motors2')
-    self.publisher = self.create_publisher(Int32MultiArray, '/motor_control', 10)
-    timer_period = 0.1 # seconds between scans
-    self.timer = self.create_timer(timer_period, self.motor_callback)
-  
-  def motor_callback(self):
-    msg = Int32MultiArray()
-    msg.data = [100,100]
-    self.publisher.publish(msg)
-
+  # def servo_callback(self, msg):
+  #   if msg.data[0] != self.servo1_angle:
+  #     self.car.set_servo(1, msg.data[0])
+  #     self.servo1_angle = msg.data[0]
+  #   if msg.data[1] != self.servo2_angle:
+  #     self.car.set_servo(2, msg.data[1])
+  #     self.servo2_angle = msg.data[1]
 
 def main(args=None):
   rclpy.init(args=args)
   
   subscriber = MinimalSubscriber()
-  publisher = MinimalPublisher()
   try:
     rclpy.spin(subscriber)
-    rclpy.spin(publisher)
   except Exception as e:
     print(e)
     subscriber.car.stop()
