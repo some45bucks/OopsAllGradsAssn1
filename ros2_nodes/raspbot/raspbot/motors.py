@@ -84,9 +84,10 @@ class MinimalSubscriber(Node):
 
 class MinimalPublisher(Node):
   def __init__(self):
-    print('motors2')
     super().__init__('motors2')
     self.publisher = self.create_publisher(Int32MultiArray, '/motor_control', 10)
+    timer_period = 0.1 # seconds between scans
+    self.timer = self.create_timer(timer_period, self.timer_callback)
   
   def motor_callback(self):
     msg = Int32MultiArray()
