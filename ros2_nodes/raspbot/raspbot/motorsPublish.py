@@ -18,7 +18,7 @@ class MinimalPublisher(Node):
     if self.stop:
       return
     msg = Int32MultiArray()
-    msg.data = [100,100]
+    msg.data = [50,50]
     self.publisher.publish(msg)
     sleep(2)
     msg.data = [0,0]
