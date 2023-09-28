@@ -73,8 +73,8 @@ class MCN(Node):
     print('mcn')
   
   def motor_callback(self, msg):
-    V = msg[0]
-    AV = msg[1]
+    V = msg.data[0]
+    AV = msg.data[1]
 
     if V > 0 and AV == 0:
         self.car.control_car(75, 75)
