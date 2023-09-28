@@ -11,7 +11,7 @@ Building the ROS package is only required when cloning the repository or when ne
 ### Using the Nodes
 
 * To use the nodes, first source the `install/local_setup.bash` if you haven't already for the existing shell session.
-* Run nodes using `ros2 run raspbot <list of node names here>`
+* Run nodes using `ros2 run raspbot <node name here>`
 
 ## Info about sonar
 

@@ -62,7 +62,7 @@ class Car:
         self.__write_array(register, data)
 
 
-class MinimalSubscriber(Node):
+class MCN(Node):
   def __init__(self):
     super().__init__('motorsSubscribe')
     self.car = Car()
@@ -70,26 +70,27 @@ class MinimalSubscriber(Node):
     # self.servo_subscription = self.create_subscription(Int32MultiArray, '/servo_control', self.servo_callback, 10)
     # self.servo1_angle = -1
     # self.servo2_angle = -1
+    print('mcn')
   
   def motor_callback(self, msg):
-    V = msg[0]
-    AV = msg[1]
+    V = msg.data[0]
+    AV = msg.data[1]
 
     if V > 0 and AV == 0:
         self.car.control_car(75, 75)
     elif V < 0 and AV == 0:
         self.car.control_car(-75, -75)
     elif V == 0 and AV > 0:
-        self.car.control_car(75, -75)
+        self.car.control_car(100, -100)
     elif V == 0 and AV < 0:
-        self.car.control_car(-75, 75)
+        self.car.control_car(-100, 100)
     else:
         self.car.control_car(0, 0)
 
 def main(args=None):
   rclpy.init(args=args)
   
-  subscriber = MinimalSubscriber()
+  subscriber = MCN()
   
   try:
     rclpy.spin(subscriber)
