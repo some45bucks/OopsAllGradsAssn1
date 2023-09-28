@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'motorsSubscribe = raspbot.motorsSubscribe:main',
+            'MCN = raspbot.MCN:main',
             'motorsPublish = raspbot.motorsPublish:main',
             'sonar = raspbot.sonar:main',
             'camera = raspbot.camera:main',

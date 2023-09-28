@@ -27,3 +27,4 @@ Building the ROS package is only required when cloning the repository or when ne
 * Dimension: 45mm x 20mm x 15mm
 
 At 75 power the robot moves at .3 meters per second
+At 75 power turning the robot moves ~90 degrees per second
