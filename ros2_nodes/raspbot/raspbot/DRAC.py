@@ -23,12 +23,16 @@ class DRAC(Node):
     print('drac')
   
   def drac_callback(self):
-    if self.stop or self.turn_count >= 3:
-      return
-    
     msg = Int32MultiArray()
-    msg.data = self.motor_data()
     self.elapsed_time += 0.1
+
+    if self.stop or self.turn_count >= 3:
+        msg.data = [0,0]
+        self.stop = True
+        self.publisher.publish(msg) 
+        return
+    
+    msg.data = self.motor_data()
     self.publisher.publish(msg)    
     
   def motor_data(self):
