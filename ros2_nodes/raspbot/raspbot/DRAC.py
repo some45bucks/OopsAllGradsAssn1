@@ -8,7 +8,7 @@ import math
 class DRAC(Node):
   def __init__(self):
     super().__init__('DRAC')
-    self.publisher = self.create_publisher(Int32MultiArray, '/DRAC', 10)
+    self.publisher = self.create_publisher(Int32MultiArray, '/motor_control', 10)
     timer_period = 0.1
     self.timer = self.create_timer(timer_period, self.drac_callback)
     self.stop = False
@@ -20,6 +20,7 @@ class DRAC(Node):
     self.straight_duration  = 2.0
     self.turn_duration = 1
     self.turn_count = 0
+    print('drac')
   
   def drac_callback(self):
     if self.stop or self.turn_count >= 3:
