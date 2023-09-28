@@ -9,6 +9,7 @@ class DRAC(Node):
   def __init__(self):
     super().__init__('DRAC')
     self.publisher = self.create_publisher(Int32MultiArray, '/motor_control', 10)
+    #self.publisher = self.create_publisher(Int32MultiArray, '/imu thing', 10) for later
     timer_period = 0.1
     self.timer = self.create_timer(timer_period, self.drac_callback)
     self.stop = False
@@ -18,9 +19,8 @@ class DRAC(Node):
     self.isTurning = False
     self.elapsed_time  = 0.0
     self.straight_duration  = 2.0
-    self.turn_duration = .80
+    self.turn_duration = .80 # this needs to be tweaked
     self.turn_count = 0
-    print('drac')
   
   def drac_callback(self):
     msg = Int32MultiArray()
