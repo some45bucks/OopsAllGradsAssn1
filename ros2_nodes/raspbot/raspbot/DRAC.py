@@ -18,7 +18,7 @@ class DRAC(Node):
     self.isTurning = False
     self.elapsed_time  = 0.0
     self.straight_duration  = 2.0
-    self.turn_duration = 1
+    self.turn_duration = .75
     self.turn_count = 0
     print('drac')
   
