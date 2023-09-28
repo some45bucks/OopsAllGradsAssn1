@@ -12,13 +12,13 @@ class DRAC(Node):
     timer_period = 0.1
     self.timer = self.create_timer(timer_period, self.drac_callback)
     self.stop = False
-    self.turn_left = [-75,75]
-    self.go_straight = [75,75]
+    self.turn_left = [0,-1]
+    self.go_straight = [1,0]
 
     self.isTurning = False
     self.elapsed_time  = 0.0
     self.straight_duration  = 2.0
-    self.turn_duration = 1.8
+    self.turn_duration = 1
     self.turn_count = 0
   
   def drac_callback(self):
