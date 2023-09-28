@@ -12,7 +12,7 @@ class DRAC(Node):
     timer_period = 0.1
     self.timer = self.create_timer(timer_period, self.drac_callback)
     self.stop = False
-    self.turn_left = [0,1]
+    self.turn_right = [0,1]
     self.go_straight = [1,0]
 
     self.isTurning = False
@@ -26,7 +26,7 @@ class DRAC(Node):
     msg = Int32MultiArray()
     self.elapsed_time += 0.1
 
-    if self.stop or self.turn_count >= 800:
+    if self.stop or self.turn_count >= 4:
         msg.data = [0,0]
         self.stop = True
         self.publisher.publish(msg) 
@@ -46,7 +46,7 @@ class DRAC(Node):
     if self.elapsed_time >= self.turn_duration:
       self.isTurning = False
       self.elapsed_time = 0.0
-    return self.turn_left
+    return self.turn_right
   
   # straight -> turn or continue straight
   def go_straight_data(self):
@@ -66,14 +66,8 @@ def main(args=None):
     rclpy.spin(publisher)
   except KeyboardInterrupt as e:
     print(e)
-    msg = Int32MultiArray()
-    msg.data = [0,0]
-    publisher.publish(msg)
   except Exception as e:
     print(e)
-    msg = Int32MultiArray()
-    msg.data = [0,0]
-    publisher.publish(msg)
   
   publisher.destroy_node()
   rclpy.shutdown()
