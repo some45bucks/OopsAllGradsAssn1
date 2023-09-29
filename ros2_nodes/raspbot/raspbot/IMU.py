@@ -13,11 +13,11 @@ class IMU(Node):
     self.IMU_subscription = self.create_subscription(Float32MultiArray, '/motor_control', self.IMU_callback, 10)
     self.IMU_publisher = self.create_publisher(Float32MultiArray, '/log', 10)
     self.timer_period = 0.1
-    self.timer = self.create_timer(self.timer_period, self.IMU_send)
     self.V = 0
     self.AV = 0
     self.startTime = time.time()
     self.time = 0
+    self.timer = self.create_timer(self.timer_period, self.IMU_send)
 
   def IMU_send(self):
     msg = Float32MultiArray()
