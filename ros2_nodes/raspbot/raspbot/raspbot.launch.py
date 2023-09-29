@@ -16,8 +16,15 @@ def generate_launch_description():
         executable="DRAC",
         name='DRAC'
     )
+
+    IMU = Node(
+        package="raspbot",
+        executable="IMU",
+        name='IMU'
+    )
  
     ld.add_action(MCN)
     ld.add_action(DRAC)
+    ld.add_action(IMU)
     
     return ld
