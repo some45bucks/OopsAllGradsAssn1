@@ -10,8 +10,17 @@ Building the ROS package is only required when cloning the repository or when ne
 
 ### Using the Nodes
 
+This robot project depends on the `rosbridge_server` package, which is available on the ROS2 apt repository. To install: `sudo apt install ros-<rosdistro>-rosbridge-server`.
+
 * To use the nodes, first source the `install/local_setup.bash` if you haven't already for the existing shell session.
 * Run nodes using ` ros2 launch raspbot/raspbot.launch.py`
+
+### Running TeleOp
+
+* To run the teleop node, on the machine that will control the robot, install the python packages in `teleop-controller-pc/requirements.txt` using pip.
+* After installing the required packages, from the `teleop-controller-pc` directory, run `python3 teleop.py <robot-network-address>` to start the teleop node.
+* After the teleop client is running, you can control the robot with the displayed controls. To stop the robot
+and exit teleop control, press ESC or CTRL+C.
 
 ## Info about sonar
 
