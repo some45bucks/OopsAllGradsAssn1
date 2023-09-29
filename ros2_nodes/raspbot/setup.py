@@ -21,10 +21,9 @@ setup(
     entry_points={
         'console_scripts': [
             'MCN = raspbot.MCN:main',
-            'motorsPublish = raspbot.motorsPublish:main',
-            'sonar = raspbot.sonar:main',
-            'camera = raspbot.camera:main',
-            'DRAC = raspbot.DRAC:main'
+            'DRAC = raspbot.DRAC:main',
+            'IMU = raspbot.IMU:main',
+            'log = raspbot.log:main'
         ],
     },
 )
