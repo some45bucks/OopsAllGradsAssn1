@@ -11,7 +11,7 @@ class IMU(Node):
   def __init__(self):
     super().__init__('IMU')
     self.IMU_subscription = self.create_subscription(Int32MultiArray, '/motor_control', self.IMU_callback, 10)
-    self.IMU_publisher = self.create_publisher(Int32MultiArray, '/IMU', 10)
+    self.IMU_publisher = self.create_publisher(Int32MultiArray, '/log', 10)
     self.timer_period = 0.1
     self.timer = self.create_timer(self.timer_period, self.IMU_send)
     self.V = 0

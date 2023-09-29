@@ -64,7 +64,7 @@ class Car:
 
 class MCN(Node):
   def __init__(self):
-    super().__init__('motorsSubscribe')
+    super().__init__('MCN')
     self.car = Car()
     self.motor_subscription = self.create_subscription(Int32MultiArray, '/motor_control', self.motor_callback, 10)
   
