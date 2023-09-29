@@ -6,6 +6,7 @@ from std_msgs.msg import Float32MultiArray
 import smbus
 import time
 import math
+import rospy
 
 
 class Log(Node):
@@ -17,8 +18,13 @@ class Log(Node):
         self.theta = 0
         self.prevTime = 0
 
+        self.stop = False
+
+        self.mem = []
+
         i = 0
         while os.path.exists(f"./pathlogs/logs_run{i}.csv"):
+            rospy.loginfo(f"checking file {i}")
             i+=1
 
         self.file = open(f"./pathlogs/logs_run{i}.csv", 'w')
@@ -26,6 +32,9 @@ class Log(Node):
         self.writer = csv.writer(self.file)
 
     def data_callback(self, msg):
+        if self.stop:
+            return 
+
         v = msg.data[0]
         av = msg.data[1]
         t = msg.data[2] - self.prevTime
@@ -37,7 +46,15 @@ class Log(Node):
         self.y += yV * t
         self.theta += av * t
 
-        self.writer.writerow([self.x,self.y,self.theta,msg.data[2]])
+        self.mem.append([self.x,self.y,self.theta,msg.data[2]])
+
+        if msg.data[2] > 15:
+            self.stop = True
+            for line in self.mem:
+                self.writer.writerow(line)
+            self.file.close()
+
+        self.prevTime = msg.data[2]
 
 
 def main(args=None):
@@ -49,10 +66,8 @@ def main(args=None):
         rclpy.spin(subscriber)
     except KeyboardInterrupt as e:
         print(e)
-        subscriber.file.close()
     except Exception as e:
         print(e)
-        subscriber.file.close()
 
     subscriber.destroy_node()
     rclpy.shutdown()
