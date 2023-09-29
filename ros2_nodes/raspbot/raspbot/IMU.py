@@ -21,7 +21,7 @@ class IMU(Node):
 
   def IMU_send(self):
     msg = Float32MultiArray()
-    msg.data = [self.V,self.AV,time.time()-self.startTime]
+    msg.data = [self.V,self.AV,time.time()-self.startTime] #add time stamp for data vis
     self.IMU_publisher.publish(msg)
       
   def IMU_callback(self, msg):
@@ -33,16 +33,16 @@ class IMU(Node):
 def main(args=None):
   rclpy.init(args=args)
   
-  subscriber = IMU()
+  imu = IMU()
   
   try:
-    rclpy.spin(subscriber)
+    rclpy.spin(imu)
   except KeyboardInterrupt as e:
     print(e)
   except Exception as e:
     print(e)
   
-  subscriber.destroy_node()
+  imu.destroy_node()
   rclpy.shutdown()
 
 if __name__ == '__main__':

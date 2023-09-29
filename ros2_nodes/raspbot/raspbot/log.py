@@ -21,10 +21,12 @@ class Log(Node):
 
         self.mem = []
 
+        #find new file for runs
         i = 0
         while os.path.exists(f"./pathlogs/logs_run{i}.csv"):
             i+=1
 
+        #open file
         self.file = open(f"./pathlogs/logs_run{i}.csv", 'w')
 
         self.writer = csv.writer(self.file)
@@ -35,13 +37,14 @@ class Log(Node):
         av = msg.data[1]
         t = msg.data[2] - self.prevTime
 
-        xV = v * math.cos(self.theta)
-        yV = v * math.sin(self.theta)
+        xV = v * math.sin(self.theta)
+        yV = v * math.cos(self.theta)
 
         self.x += xV * t
         self.y += yV * t
         self.theta += av * t
 
+        #writes data x pos, y pos, angle, and then the time stamp from 0
         self.writer.writerow([self.x,self.y,self.theta,msg.data[2]])
 
         self.prevTime = msg.data[2]

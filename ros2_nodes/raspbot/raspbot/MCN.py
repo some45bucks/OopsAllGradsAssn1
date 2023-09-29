@@ -72,7 +72,7 @@ class MCN(Node):
     V = msg.data[0]
     AV = msg.data[1]
 
-    # these need to be tweaked
+    # the amount of power for each velocity and turn
     if V > 0 and AV == 0:
         self.car.control_car(75, 75)
     elif V < 0 and AV == 0:
