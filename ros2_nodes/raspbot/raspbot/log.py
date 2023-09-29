@@ -18,10 +18,10 @@ class Log(Node):
         self.prevTime = 0
 
         i = 0
-        while os.path.exists(f"../logs/logs_run{i}.csv"):
+        while os.path.exists(f"../pathlogs/logs_run{i}.csv"):
             i+=1
 
-        self.file = open(f"../logs/logs_run{i}.csv", 'w')
+        self.file = open(f"../pathlogs/logs_run{i}.csv", 'w')
 
         self.writer = csv.writer(self.file)
 
