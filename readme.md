@@ -10,17 +10,24 @@ This robot project depends on the `rosbridge_server` package, which is available
 
 #### TeleOp Client Dependencies
 
+The TeleOp Client was written against python 3.11, though any version of python 3 that supports the `match` statement should work.
+
 The teleop client dependencies are specified in `teleop-controller-pc/requirements.txt`. To install, run `pip3 install -r teleop-controller-pc/requirements.txt` (installation in a venv is recommended) on the computer that will be remotely controlling the robot.
 
 ### Building the ROS Package
 
 Building the ROS package is only required when cloning the repository or when new nodes/files are added. To build:
 
-* Navigate to the `ros2_nodes/raspbot` directory and run `colcon build --symlink-install` to build the package.
+* Ensure you have sourced the ROS setup script (`/opt/ros/<distro>/setup.bash`) for the ROS distro you are using.
+* From the root of the repository, run the `buildpackage.sh` script. OR, if that doesn't work, Navigate to the `ros2_nodes/raspbot` directory and run `colcon build --symlink-install` to build the package.
 
 ## Running the Robot Programs
 
 ### Running Robot Nodes
+
+Make sure you've sourced the ROS setup script (`/opt/ros/<distro>/setup.bash`) before running any robot nodes or scripts on the robot.
+
+In the root of the repo are two shell scripts to ease running the robot nodes. You can run these scripts from the root of the repo, or you can run the commands manually as described below after you have followed the steps to build the ROS package.
 
 1. Build the ROS package if you haven't already.
 2. Source the `install/local_setup.bash` if you haven't already for the existing shell session.
@@ -30,6 +37,9 @@ Building the ROS package is only required when cloning the repository or when ne
 
 ### Running TeleOp Client
 
+The TeleOp Client is a regular python script. It can run from any machine with the needed dependencies installed (as described above). You will need to be on the same network as the robot to connect to it and will need to have the robot's IP address or hostname.
+
+* Ensure you have a recent version of python that supports the `match` statement installed.
 * To run the teleop node, on the machine that will control the robot, install the python packages in `teleop-controller-pc/requirements.txt` using pip.
 * After installing the required packages, from the `teleop-controller-pc` directory, run `python3 teleop.py <robot-network-address>` to start the teleop node.
 * After the teleop client is running, you can control the robot with the displayed controls. To stop the robot
