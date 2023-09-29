@@ -30,7 +30,6 @@ class Log(Node):
         self.writer = csv.writer(self.file)
 
     def data_callback(self, msg):
-        self.writer.writerow(['a','b','c','d'])
         if self.stop:
             return 
 
@@ -46,8 +45,8 @@ class Log(Node):
         self.theta += av * t
 
         self.mem.append([self.x,self.y,self.theta,msg.data[2]])
-        self.get_logger().error(f'{msg.data[2]}', throttle_duration_sec=1)
-        if msg.data[2] > 15:
+
+        if v == 0 and av == 0:
             self.stop = True
             for line in self.mem:
                 self.writer.writerow(line)
