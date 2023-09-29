@@ -1,24 +1,26 @@
-import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
-from matplotlib.colors import Normalize
+import pandas as pd
+from matplotlib.colors import Normalize, to_rgba
+from matplotlib.cm import ScalarMappable
 
+df = pd.read_csv('../pathlogs/logs.csv')
+df.columns = ['x', 'y', 'orientation', 'timestamp']
+colormap = 'plasma'
 
-df = pd.read_csv(f'../pathlogs/logs_run{1}.csv')
+timestamp_min = df['timestamp'].min()
+timestamp_max = df['timestamp'].max()
 
-df.columns = ['x', 'y','orientation', 'timestamp']
+norm = Normalize(vmin=timestamp_min, vmax=timestamp_max)
 
-colormap = 'viridis' 
+sm = ScalarMappable(cmap=colormap, norm=norm)
+sm.set_array([])  
 
-norm = Normalize(vmin=df['timestamp'].min(), vmax=df['timestamp'].max())
+f, ax = plt.subplots(figsize=(8, 6))
+for index, row in df.iterrows():
+    color = sm.to_rgba(row['timestamp'])  
+    ax.scatter(row['x'], row['y'], c=[color], s=100, marker=(3, 0, row['orientation'] - 90), linestyle='None')
 
-plt.figure(figsize=(8, 6))
-ax = plt.gca()
-
-scatter = ax.scatter(df['x'], df['y'], c=df['timestamp'], cmap=colormap, s=100, marker=(3, 0, df['orientation']), linestyle='None')
-
-cbar = plt.colorbar(scatter)
-cbar.set_label('Timestamp (seconds)')
+cb = f.colorbar(sm, ax=ax, label='Timestamp (seconds)')
 
 ax.set_xlabel('X-axis')
 ax.set_ylabel('Y-axis')
