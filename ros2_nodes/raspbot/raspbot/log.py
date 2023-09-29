@@ -2,7 +2,7 @@ import rclpy
 from rclpy.node import Node
 import os
 import csv
-from std_msgs.msg import Int32MultiArray
+from std_msgs.msg import Float32MultiArray
 import smbus
 import time
 import math
@@ -11,7 +11,7 @@ import math
 class Log(Node):
     def __init__(self):
         super().__init__('log')
-        self.motor_subscription = self.create_subscription(Int32MultiArray, '/log', self.motor_callback, 10)
+        self.motor_subscription = self.create_subscription(Float32MultiArray, '/log', self.motor_callback, 10)
         self.x = 0
         self.y = 0
         self.theta = 0

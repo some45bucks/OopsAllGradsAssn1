@@ -1,14 +1,14 @@
 import rclpy
 from rclpy.node import Node
 
-from std_msgs.msg import Int32MultiArray
+from std_msgs.msg import Float32MultiArray
 import smbus
 import math
 
 class DRAC(Node):
   def __init__(self):
     super().__init__('DRAC')
-    self.publisher = self.create_publisher(Int32MultiArray, '/motor_control', 10)
+    self.publisher = self.create_publisher(Float32MultiArray, '/motor_control', 10)
     timer_period = 0.1
     self.timer = self.create_timer(timer_period, self.drac_callback)
     self.stop = False
@@ -22,7 +22,7 @@ class DRAC(Node):
     self.turn_count = 0
   
   def drac_callback(self):
-    msg = Int32MultiArray()
+    msg = Float32MultiArray()
     self.elapsed_time += 0.1
 
     if self.stop or self.turn_count >= 4:

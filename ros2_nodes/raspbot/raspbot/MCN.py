@@ -1,7 +1,7 @@
 import rclpy
 from rclpy.node import Node
 
-from std_msgs.msg import Int32MultiArray
+from std_msgs.msg import Float32MultiArray
 import smbus
 import time
 import math
@@ -66,7 +66,7 @@ class MCN(Node):
   def __init__(self):
     super().__init__('MCN')
     self.car = Car()
-    self.motor_subscription = self.create_subscription(Int32MultiArray, '/motor_control', self.motor_callback, 10)
+    self.motor_subscription = self.create_subscription(Float32MultiArray, '/motor_control', self.motor_callback, 10)
   
   def motor_callback(self, msg):
     V = msg.data[0]
