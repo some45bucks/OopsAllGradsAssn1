@@ -23,8 +23,8 @@
   
   <!-- Raspbot Package Nodes -->
   <node name="motor_control" pkg="raspbot" exec="MCN" />
-  <!-- <node name="DRAC" pkg="raspbot" exec="DRAC" /> -->
   <node name="IMU" pkg="raspbot" exec="IMU" />
+  <!-- <node name="logger" pkg="raspbot" exec="log" /> -->
   <!-- END Raspbot Package Nodes -->
 
   <!-- ROS Bridge Nodes -->
