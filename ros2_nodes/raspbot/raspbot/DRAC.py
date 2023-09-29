@@ -9,12 +9,11 @@ class DRAC(Node):
   def __init__(self):
     super().__init__('DRAC')
     self.publisher = self.create_publisher(Int32MultiArray, '/motor_control', 10)
-    #self.publisher = self.create_publisher(Int32MultiArray, '/imu thing', 10) for later
     timer_period = 0.1
     self.timer = self.create_timer(timer_period, self.drac_callback)
     self.stop = False
-    self.turn_right = [0,1]
-    self.go_straight = [1,0]
+    self.turn_right = [0,90] #this needs to be tweaked
+    self.go_straight = [.3,0] #this needs to be tweaked
 
     self.isTurning = False
     self.elapsed_time  = 0.0
@@ -29,7 +28,7 @@ class DRAC(Node):
     if self.stop or self.turn_count >= 4:
         msg.data = [0,0]
         self.stop = True
-        self.publisher.publish(msg) 
+        self.publisher.publish(msg)
         return
     
     msg.data = self.motor_data()
