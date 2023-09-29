@@ -30,8 +30,6 @@ class Log(Node):
         self.writer = csv.writer(self.file)
 
     def data_callback(self, msg):
-        if self.stop:
-            return 
 
         v = msg.data[0]
         av = msg.data[1]
@@ -44,13 +42,7 @@ class Log(Node):
         self.y += yV * t
         self.theta += av * t
 
-        self.mem.append([self.x,self.y,self.theta,msg.data[2]])
-
-        if v == 0 and av == 0:
-            self.stop = True
-            for line in self.mem:
-                self.writer.writerow(line)
-            self.file.close()
+        self.writer.writerow([self.x,self.y,self.theta,msg.data[2]])
 
         self.prevTime = msg.data[2]
 
@@ -64,9 +56,11 @@ def main(args=None):
         rclpy.spin(subscriber)
     except KeyboardInterrupt as e:
         print(e)
+        subscriber.file.close()
     except Exception as e:
         print(e)
-    print(subscriber.prevTime)
+        subscriber.file.close()
+
     subscriber.destroy_node()
     rclpy.shutdown()
 

@@ -78,9 +78,9 @@ class MCN(Node):
     elif V < 0 and AV == 0:
         self.car.control_car(-75, -75)
     elif V == 0 and AV > 0:
-        self.car.control_car(100, -100)
+        self.car.control_car(75, -75)
     elif V == 0 and AV < 0:
-        self.car.control_car(-100, 100) 
+        self.car.control_car(-75, 75) 
     else:
         self.car.control_car(0, 0)
 
