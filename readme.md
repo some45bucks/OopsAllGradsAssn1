@@ -10,7 +10,7 @@ This robot project depends on the `rosbridge_server` package, which is available
 
 #### TeleOp Client Dependencies
 
-The teleop client dependencies are specified in `teleop-controller-pc/requirements.txt`. To install, run `pip3 install -r teleop-controller-pc/requirements.txt` (installation in a venv is recommended).
+The teleop client dependencies are specified in `teleop-controller-pc/requirements.txt`. To install, run `pip3 install -r teleop-controller-pc/requirements.txt` (installation in a venv is recommended) on the computer that will be remotely controlling the robot.
 
 ### Building the ROS Package
 
@@ -18,7 +18,9 @@ Building the ROS package is only required when cloning the repository or when ne
 
 * Navigate to the `ros2_nodes/raspbot` directory and run `colcon build --symlink-install` to build the package.
 
-### Running Robot Programs
+## Running the Robot Programs
+
+### Running Robot Nodes
 
 1. Build the ROS package if you haven't already.
 2. Source the `install/local_setup.bash` if you haven't already for the existing shell session.
@@ -26,7 +28,7 @@ Building the ROS package is only required when cloning the repository or when ne
     - `square_launch.xml`: Launches the square program, which moves the robot in a square. Robot moves 2 seconds before each turn.
     - `teleop_launch.xml`: Launches the teleop program, which allows for robot control from a remote machine connecting through the teleop client (see below).
 
-### Running TeleOp
+### Running TeleOp Client
 
 * To run the teleop node, on the machine that will control the robot, install the python packages in `teleop-controller-pc/requirements.txt` using pip.
 * After installing the required packages, from the `teleop-controller-pc` directory, run `python3 teleop.py <robot-network-address>` to start the teleop node.
@@ -45,6 +47,8 @@ and exit teleop control, press ESC or CTRL+C.
 * Trigger Input Pulse width: 10uS TTL pulse
 * Echo Output Signal: TTL pulse proportional to the distance range
 * Dimension: 45mm x 20mm x 15mm
+
+## Calibrations used for robot motors
 
 At 75 power the robot moves at .3 meters per second
 At 75 power turning the robot moves ~90 degrees per second
