@@ -5,12 +5,12 @@ class VelocityMessage(Message):
     Message for sending a linear velocity, in meters, and an angular velocity, in degrees.
     """
 
-    message_type = 'std_msgs/Int32MultiArray'
+    message_type = 'std_msgs/Float32MultiArray'
     """
     The ROS message type string for this message class.
     """
 
-    def __init__(self, lin_vel: int, ang_vel: int) -> None:
+    def __init__(self, lin_vel: float, ang_vel: float) -> None:
         payload = {
             'layout': {
                 'dim': [{
