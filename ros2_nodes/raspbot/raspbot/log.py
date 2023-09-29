@@ -45,7 +45,7 @@ class Log(Node):
         self.theta += av * t
 
         self.mem.append([self.x,self.y,self.theta,msg.data[2]])
-        self.get_logger().info(f'{msg.data[2]}')
+        self.get_logger().error(f'{msg.data[2]}', throttle_duration_sec=1)
         if msg.data[2] > 15:
             self.stop = True
             for line in self.mem:
