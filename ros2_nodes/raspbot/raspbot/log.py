@@ -6,7 +6,6 @@ from std_msgs.msg import Float32MultiArray
 import smbus
 import time
 import math
-import rospy
 
 
 class Log(Node):
@@ -24,7 +23,6 @@ class Log(Node):
 
         i = 0
         while os.path.exists(f"./pathlogs/logs_run{i}.csv"):
-            rospy.loginfo(f"checking file {i}")
             i+=1
 
         self.file = open(f"./pathlogs/logs_run{i}.csv", 'w')
