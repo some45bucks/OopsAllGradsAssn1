@@ -66,3 +66,7 @@ At 75 power turning the robot moves ~90 degrees per second
 ## Structure of code
 
 There are 5 nodes being used with and 4 running at any given time. The core is MCN, IMU, and log with DRAC and the teleop node swapping each other out. The flow of information goes from either the DRAC or teleop node giving the velocity commands and then the MCN giving them to the motors. The IMU, just a emulated one based entirely on the velocitys we assume, will output time-stamped linear and angular velocitys who then get procces by the log node. The log node outputs to a csv file where we use visualize.py on it to get the path the robot thinks it went.
+
+## Visualizations
+
+The two png files in the pathlogs folder are the result of running their log folders throught the visualize.py file. A lot of the inaccuracy can be given to the low refresh rate we gave to the IMU which only sends 10 updates per second.
