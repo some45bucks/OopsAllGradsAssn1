@@ -30,6 +30,7 @@ class Log(Node):
         self.writer = csv.writer(self.file)
 
     def data_callback(self, msg):
+        self.writer.writerow(['a','b','c','d'])
         if self.stop:
             return 
 
