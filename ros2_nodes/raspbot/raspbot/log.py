@@ -11,7 +11,7 @@ import math
 class Log(Node):
     def __init__(self):
         super().__init__('log')
-        self.motor_subscription = self.create_subscription(Float32MultiArray, '/log', self.motor_callback, 10)
+        self.log_subscription = self.create_subscription(Float32MultiArray, '/log', self.data_callback, 10)
         self.x = 0
         self.y = 0
         self.theta = 0
