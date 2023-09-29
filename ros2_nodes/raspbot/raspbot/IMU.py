@@ -21,7 +21,7 @@ class IMU(Node):
 
   def IMU_send(self):
     msg = Float32MultiArray()
-    msg.data = [self.currentX,self.currentTheta,time.time()-self.startTime]
+    msg.data = [self.V,self.AV,time.time()-self.startTime]
     self.IMU_publisher.publish(msg)
       
   def IMU_callback(self, msg):
