@@ -66,7 +66,7 @@ def main(args=None):
         print(e)
     except Exception as e:
         print(e)
-
+    print(subscriber.prevTime)
     subscriber.destroy_node()
     rclpy.shutdown()
 
